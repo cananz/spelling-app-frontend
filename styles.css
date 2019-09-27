@@ -5,10 +5,10 @@ div#phrase-container{
 
 span.letter-block{
   /* background-color: orange; */
-  /* display: inline-block;
-  border: 1px solid black; */
+  /* display: inline-block; */
+  /* border: 1px solid black; */
   font-size: 40px;
-  color: grey;
+  color: white;
 }
 
 div#alphabet-container{

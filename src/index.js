@@ -19,6 +19,9 @@ alphabetContainer.addEventListener('click', guessLetter)
 
 function guessLetter(e){//debugger
   if (e.target.nodeName === "BUTTON") {
+    let matches = document.querySelectorAll(`span#${e.target.id}`)
+    matches.forEach(letter => letter.style.color = 'red')
+    // debugger
     console.log(e.target.dataset.id)
   }
 }
@@ -73,7 +76,7 @@ function display(Arr, element, parentElement) {
     letterBlock = document.createElement(element)
 
       letterBlock.innerText = letter
-      letterBlock.setAttribute('data-id', letter)
+      letterBlock.setAttribute('id', letter)
       letterBlock.className = 'letter-block'
 
     parentElement.appendChild(letterBlock)
