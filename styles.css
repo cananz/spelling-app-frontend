@@ -1,0 +1,22 @@
+div#phrase-container{
+  /* color: blue; */
+  /* background-color: yellow; */
+}
+
+span.letter-block{
+  /* background-color: orange; */
+  /* display: inline-block;
+  border: 1px solid black; */
+  font-size: 40px;
+  color: grey;
+}
+
+div#alphabet-container{
+
+}
+
+button.letter-block{
+width: 40px;
+height: 40px;
+font-size: 35px;
+}
