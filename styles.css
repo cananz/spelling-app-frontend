@@ -1,39 +1,42 @@
 
 span.letter-visible{
   visibility: visible;
-  background-blend-mode: darken;
+  display: inline-block;
+  /* background-blend-mode: darken; */
   /* background-color: pink; */
   /* background-clip: content-box; */
-  font-size: 50px;
+  font-size: 40px;
   color: red;
   width: 50px;
-  /* padding: px; */
+  height: 50px;
+  padding: 10px 5px;
   /* height: 100px; */
   text-align: center;
-  vertical-align: middle;
+  vertical-align: bottom;
 }
 
 span.letter-hidden{
   visibility: hidden;
   display: inline-block;
   /* border: 1px solid black; */
-  font-size: 50px;
+  /* font-size: 50px; */
   /* content: "\0020"; */
   width: 50px;
+  height: 50px;
   /* padding: 10px; */
-  text-align: center;
-  vertical-align: middle;
+  /* text-align: center; */
+  /* vertical-align: text-bottom; */
   /* height: 75px */
   /* color: white; */
 }
 
 span.letter-container{
   border: 2px solid #ffec99;
-  border-radius: 5px;
+  /* border-radius: 3px; */
   /* background-color: #fff9db; */
-  width: 50px;
-  height: 50px;
-  padding: 10px;
+  width: 60px;
+  height: 60px;
+  padding: 4px;
   background-color: white;
 }
 
@@ -70,11 +73,20 @@ font-size: 35px;
 
 .box {
   border: 2px solid #ffa94d;
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: azure;
   padding: 1em;
-  color: #d9480f;
+  color: black;
 }
+
+.progress-box {
+  border: 2px solid #ffa94d;
+  border-radius: 2px;
+  background-color: azure;
+  padding: 1em;
+  color: black;
+}
+
 .nested {
   border: 2px solid #ffec99;
   border-radius: 5px;

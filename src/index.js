@@ -29,8 +29,13 @@ function guessLetter(e){//debugger
     let matches = document.querySelectorAll(`span#${e.target.id}`)
     if (matches.length === 0) {
       wrongGuessCount -= 1
-      document.querySelector('progress.uk-progress').value = wrongGuessCount
-      document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`}
+      // document.querySelector('progress.uk-progress').value = wrongGuessCount
+      document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
+      //decrements progress bar
+      $('#example5')
+        .progress('decrement')
+      ;
+    }
     matches.forEach(letter => letter.className = 'letter-visible')
     // debugger
     turnCount += 1
@@ -149,6 +154,15 @@ function displayGameBoard() {
 
   displayAlphabet()
   getPhrase()
+  // Resets progress bar
+  $('#example5')
+  .progress({
+    label: 'ratio',
+    text: {
+      ratio: '{value} of {total}'
+    }
+  })
+;
 }
 
 function clearBoard() {
