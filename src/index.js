@@ -8,7 +8,7 @@ const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
 let currentPhrase
 
 document.addEventListener("DOMContentLoaded", function() {
-  display(alphabet, 'button', alphabetContainer)
+  displayAlphabet(alphabet, 'button', alphabetContainer)
   getPhrase()
   // debugger
 })
@@ -20,11 +20,12 @@ alphabetContainer.addEventListener('click', guessLetter)
 function guessLetter(e){//debugger
   if (e.target.nodeName === "BUTTON") {
     let matches = document.querySelectorAll(`span#${e.target.id}`)
-    matches.forEach(letter => letter.style.color = 'red')
+    matches.forEach(letter => letter.className = 'letter-visible')
     // debugger
     console.log(e.target.dataset.id)
   }
 }
+
 
 
 
@@ -62,7 +63,7 @@ function randomPhrase(phraseObjArray) {
   currentPhrase = phraseObjArray[randomIndex]
   // debugger
   toDisplay = currentPhrase.content.toUpperCase().split("")
-  display(toDisplay, 'span', phraseContainer)
+  displayPhrase(toDisplay, 'span', phraseContainer)
 return currentPhrase
 }
 
@@ -70,7 +71,7 @@ return currentPhrase
 
 
 
-function display(Arr, element, parentElement) {
+function displayAlphabet(Arr, element, parentElement) {
   Arr.forEach(letter => {
 
     letterBlock = document.createElement(element)
@@ -84,7 +85,35 @@ function display(Arr, element, parentElement) {
 }
 
 
+function displayPhrase(Arr, element, parentElement) {
+  Arr.forEach(letter => {
+    letterContainer = document.createElement('span')
+    letterContainer.className = 'letter-container'
+    symbolContainer = document.createElement('span')
+    symbolContainer.className = 'symbol-container'
 
+
+    letterBlock = document.createElement('span')
+
+      letterBlock.innerText = letter
+      letterBlock.setAttribute('id', letter)
+
+      // debugger
+  if (alphabet.includes(letterBlock.id)) {
+    // letterBlock.innerText = " "
+    letterBlock.className = 'letter-hidden'
+    letterContainer.appendChild(letterBlock)
+    parentElement.appendChild(letterContainer)
+
+  } else {
+    letterBlock.className = 'letter-visible'
+    symbolContainer.appendChild(letterBlock)
+    parentElement.appendChild(symbolContainer)
+
+  }
+
+  })
+}
 
 // function displayAlphabet(alphaArr) {
 //   const alphabetContainer = document.getElementById('alphabet-container')
