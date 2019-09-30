@@ -9,6 +9,7 @@ const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
 let currentPhrase
 let matchID
 let turnCount = 0
+let wrongGuessCount = 8
 
 //event listeners
 document.addEventListener("DOMContentLoaded", function() {
@@ -20,11 +21,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
 function guessLetter(e){//debugger
 
   if (e.target.nodeName === "BUTTON") {
 
     let matches = document.querySelectorAll(`span#${e.target.id}`)
+    if (matches.length === 0) {
+      wrongGuessCount -= 1
+      document.querySelector('progress.uk-progress').value = wrongGuessCount
+      document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`}
     matches.forEach(letter => letter.className = 'letter-visible')
     // debugger
     turnCount += 1
@@ -32,10 +38,11 @@ function guessLetter(e){//debugger
 
     e.target.style.setProperty('visibility', 'hidden')
     document.querySelector('.box5').lastElementChild.append(e.target.id)
-    document.querySelector('div.turn-count').innerText = turnCount
+    document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
 
   }
   setTimeout(checkWinStatus, 10)
+
 }
 
 function checkWinStatus() {
@@ -49,14 +56,11 @@ function gameWon() {
   // alert that you won
   sendTurnCount()
   Swal.fire({
-    title: '<strong>HTML <u>example</u></strong>',
-    type: 'info',
+    title: `<strong>You solved the puzzle in ${turnCount} moves!</strong>`,
+    type: 'success',
     imageUrl: 'https://media.giphy.com/media/2gtoSIzdrSMFO/giphy.gif',
       imageHeight: 200,
-    html:
-      'You can use <b>bold text</b>, ' +
-      '<a href="//sweetalert2.github.io">links</a> ' +
-      'and other HTML tags',
+
     showCloseButton: true,
     focusConfirm: false,
 
@@ -82,15 +86,20 @@ function gameWon() {
   // send post request to matches
   // ask to play again
 
-function sendTurnCount() {
-  configObj = {
-    method: "PATCH",
-    headers: {
+
+function configObj(method, body) {
+    return {
+    method: method,
+    headers:  {
       "Content-Type": "application/json",
       "Accepts": "application/json"},
-    body: JSON.stringify({turns: turnCount})
-  }
-  fetch(matchesURL + '/' + matchID, configObj)
+    body: JSON.stringify(body)
+    }
+}
+
+function sendTurnCount() {
+
+  fetch(matchesURL + '/' + matchID, configObj('PATCH', {turns: turnCount}))
 }
 
 
@@ -144,8 +153,11 @@ function displayGameBoard() {
 
 function clearBoard() {
   turnCount = 0
-  document.querySelector('div.turn-count').innerText = turnCount
-  document.querySelector('.box5').lastElementChild.innerText = ""
+  wrongGuessCount = 8
+
+  document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
+  document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
+  document.querySelector('div.guessed-letters').innerText = ""
 
 }
 

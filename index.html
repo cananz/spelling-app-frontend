@@ -4,8 +4,14 @@
     <meta charset="utf-8">
     <title>Spelling App</title>
     <link rel="stylesheet" href="styles.css">
-
+    <!-- win alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+    <!-- turns progress bar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+   <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css"> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
 
   </head>
 
@@ -41,17 +47,22 @@
   <!-- <div class="box box2">Two</div> -->
   <div class="box box3"></div>
     <div class="box box4">
-      turns taken:
-      <div class="turn-count nested">
+      Wrong Guesses Left:
+        <progress class="uk-progress" min="0" value="8" max="8"></progress>
+         <!-- Total Turns Taken: -->
+         <div class="wrong-turn-count nested">
 
+         </div>
+
+       <div class="turn-count nested">
       </div>
 
     </div>
     <div class="box box5">
-      <h3>Already Guessed:</h3>
-      <div class="nested">
-
-      </div>
-
+      <div class="nested">Already Guessed:</div>
+      <div class="nested guessed-letters"></div>
     </div>
+      <!-- <h3>Already Guessed:</h3> -->
+
+
 </div>

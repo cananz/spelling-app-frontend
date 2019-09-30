@@ -1,7 +1,3 @@
-div#phrase-container{
-  /* color: blue; */
-  /* background-color: yellow; */
-}
 
 span.letter-visible{
   visibility: visible;
@@ -31,12 +27,7 @@ span.letter-hidden{
   /* color: white; */
 }
 
-/* span.letter-hidden:after{
-  content:"\0020";
-} */
-
 span.letter-container{
-  /* background-color: linen; */
   border: 2px solid #ffec99;
   border-radius: 5px;
   /* background-color: #fff9db; */
