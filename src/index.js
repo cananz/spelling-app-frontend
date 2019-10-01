@@ -50,59 +50,9 @@ function guessLetter(e){//debugger
 
 }
 
-function checkEndStatus() {
-  if (document.querySelectorAll('span.letter-hidden').length === 0) {
-    gameWon()
-  }
-  // debugger
-  if (wrongGuessCount === 0){
-    gameLost()
-  }
-}
-
-function gameWon() {
-  // alert("You won!")
-  // alert that you won
-  sendTurnCount()
-  Swal.fire({
-    title: `<strong>You solved the puzzle in ${turnCount} moves!</strong>`,
-    type: 'success',
-    imageUrl: 'https://media.giphy.com/media/2gtoSIzdrSMFO/giphy.gif',
-      imageHeight: 200,
-
-    showCloseButton: true,
-    focusConfirm: false,
-
-    confirmButtonText:
-      '<i class="fa fa-thumbs-up"></i> Play Again!',
-    confirmButtonAriaLabel: 'Play Again!',
-  })
-  .then((result) => {
-    if (result.value) {
-      displayGameBoard()
-      console.log(turnCount)}
-      if (!result.value) {
-        displayGameBoard()
-        Swal.fire({
-        position: 'top-end',
-        title: '<i>Thanks for playing! Come back soon!</i>',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
-    })
 
 
-}
-  // Try me!
-  // Swal.fire({
-  //   title: 'Congrats',
-  //   imageAlt: 'Win'
-  // })
 
-  // give stats
-  // send post request to matches
-  // ask to play again
 
 
 function configObj(method, body) {
@@ -115,10 +65,7 @@ function configObj(method, body) {
     }
 }
 
-function sendTurnCount() {
 
-  fetch(matchesURL + '/' + matchID, configObj('PATCH', {turns: turnCount}))
-}
 
 
 
@@ -185,7 +132,6 @@ function clearBoard() {
   document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
   document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
   document.querySelector('div.guessed-letters').innerText = ""
-
 }
 
 function displayAlphabet() {
@@ -236,13 +182,3 @@ phraseContainer.innerHTML = ""
 
   })
 }
-
-// function displayAlphabet(alphaArr) {
-//   const alphabetContainer = document.getElementById('alphabet-container')
-//   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-//   alphaArr.map(letter => {
-//     span = document.createElement('button')
-//     span.innerText = letter
-//     alphabetContainer.appendChild(span)
-//   })
-// }
