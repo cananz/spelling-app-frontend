@@ -99,15 +99,22 @@ function postMatch(phrase) {
   })
 }
 
+// function randomPhrase(phraseObjArray) {
+//   let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
+//   currentPhrase = phraseObjArray[randomIndex]
+//   // debugger
+//   toDisplay = currentPhrase.content.toUpperCase().split("")
+//   displayPhrase(toDisplay, 'span', phraseContainer)
+// return currentPhrase
+// }
 function randomPhrase(phraseObjArray) {
-  let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
+  let randomIndex = 1 //Math.floor((Math.random() * (phraseObjArray.length - 1)))
   currentPhrase = phraseObjArray[randomIndex]
   // debugger
   toDisplay = currentPhrase.content.toUpperCase().split("")
   displayPhrase(toDisplay, 'span', phraseContainer)
 return currentPhrase
 }
-
 
 function displayGameBoard() {
   clearBoard()
