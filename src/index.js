@@ -5,17 +5,20 @@ const matchesURL = "http://localhost:3000/matches"
 const alphabetContainer = document.getElementById('alphabet-container')
 const phraseContainer = document.getElementById('phrase-container')
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+const giveUp = document.getElementById("restart")
 
-let currentPhrase
-let matchID
-let turnCount = 0
-let wrongGuessCount = 8
+let currentPhrase;
+let matchID;
+let turnCount = 0;
+let wrongGuessCount = 8;
+let phraseMatches;
 
 //event listeners
 document.addEventListener("DOMContentLoaded", function() {
   displayGameBoard()
   // debugger
   alphabetContainer.addEventListener('click', guessLetter)
+  giveUp.addEventListener('click', restartMatch)
 })
 
 
@@ -49,10 +52,6 @@ function guessLetter(e){//debugger
   setTimeout(checkEndStatus, 10)
 
 }
-
-
-
-
 
 
 function configObj(method, body) {
@@ -93,32 +92,32 @@ function postMatch(phrase) {
     })
   })
   .then(resp => resp.json())
-  .then(match => {
+  .then(matchAndMatches => {
+    let match = JSON.parse(matchAndMatches["match"])
+    phraseMatches = JSON.parse(matchAndMatches["matches"])
     matchID = match.id
+    phraseStats(currentPhrase)
     console.log(match)
   })
 }
 
-// function randomPhrase(phraseObjArray) {
-//   let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
-//   currentPhrase = phraseObjArray[randomIndex]
-//   // debugger
-//   toDisplay = currentPhrase.content.toUpperCase().split("")
-//   displayPhrase(toDisplay, 'span', phraseContainer)
-// return currentPhrase
-// }
 function randomPhrase(phraseObjArray) {
-  let randomIndex = 1 //Math.floor((Math.random() * (phraseObjArray.length - 1)))
+  let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
   currentPhrase = phraseObjArray[randomIndex]
-  // debugger
   toDisplay = currentPhrase.content.toUpperCase().split("")
   displayPhrase(toDisplay, 'span', phraseContainer)
 return currentPhrase
 }
+// function randomPhrase(phraseObjArray) {
+//   let randomIndex = 0 //Math.floor((Math.random() * (phraseObjArray.length - 1)))
+//   currentPhrase = phraseObjArray[randomIndex]
+//   toDisplay = currentPhrase.content.toUpperCase().split("")
+//   displayPhrase(toDisplay, 'span', phraseContainer)
+// return currentPhrase
+// }
 
 function displayGameBoard() {
   clearBoard()
-
   displayAlphabet()
   getPhrase()
   // Resets progress bar
@@ -187,5 +186,44 @@ phraseContainer.innerHTML = ""
 
   }
 
+  })
+}
+
+function phraseStats(phrase) {
+  let totalPlay = 0;
+  let totalWin = 0;
+  let avgTurns = 0;
+  let winPercent = 0;
+  let playedTimes = document.getElementById("total-plays")
+  let winTimes = document.getElementById("total-wins")
+  let additional = document.getElementById("additional-stats")
+
+  let phraseWins = phraseMatches.filter((play) => {
+    return (play["won?"] === true)
+  })
+  totalPlay = phraseMatches.length
+  playedTimes.innerText = `This puzzle has been played ${totalPlay} times.`
+  totalWin = phraseWins.length
+  winTimes.innerText = `This puzzle has been won ${totalWin} times.`
+
+
+  if (phraseWins.length > 10){
+    let totalTurns = phraseWins.reduce((accum, currentVal) => {
+      return accum += currentVal.turns
+    }, 0);
+    avgTurns = (totalTurns/totalWin).toFixed(2)
+    winPercent = Math.floor(totalWin/totalPlay*100)
+    additional.innerHTML = `Win Percentage: ${winPercent}% <br> Avg Turns: ${avgTurns}`
+  }
+  else {
+    additional.innerText = "This puzzle needs more plays for additional stats to be available."
+  }
+}
+
+function restartMatch() {
+  fetch(matchesURL + '/' + matchID, configObj('DELETE', {}))
+  .then(resp => resp.json())
+  .then(test => {
+    displayGameBoard()
   })
 }

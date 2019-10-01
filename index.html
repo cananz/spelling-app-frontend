@@ -8,10 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
     <!-- turns progress bar -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" /> -->
-   <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css"> -->
-   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js">
@@ -37,28 +36,56 @@
     </div>
     <!-- <div class="nested">a</div> -->
 
-  <!-- <div class="box box2">Two</div> -->
-  <div class="box box3"></div>
-    <div class="progress-box box4">
-      Wrong Guesses Left:
-      <div class="ui indicating progress" data-value="8" data-total="8" id="example5">
-        <div class="bar">
-          <div class="progress"></div>
+
+
+  <div class="box box3">
+    <div class="ui card">
+      <div class="content">
+          <div class="header">Current Puzzle</div>
         </div>
-      </div>
-         <!-- Total Turns Taken: -->
-         <div class="wrong-turn-count nested">
+        <div class="content">
+          <h4 class="ui sub header">Stats</h4>
+          <div class="ui small feed">
+            <div class="event">
+              <div class="content">
+                <div class="summary">
+                   <p id="total-plays"></p>
+                   <p id="total-wins"></p>
+                   <p id="additional-stats"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-         </div>
-
-       <div class="turn-count nested">
-      </div>
-
+        <div class="extra content">
+          <button class="ui button" id="restart"
+          uk-tooltip="title: Stuck? Click here to start a new puzzle!">New Game</button>
+        </div>
     </div>
-    <div class="box box5">
-      <div class="nested">Already Guessed:</div>
-      <div class="nested guessed-letters"></div>
+  </div>
+
+  <div class="progress-box box4">
+    Wrong Guesses Left:
+    <div class="ui indicating progress" data-value="8" data-total="8" id="example5">
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
     </div>
+       <!-- Total Turns Taken: -->
+       <div class="wrong-turn-count nested">
+
+       </div>
+
+     <div class="turn-count nested">
+    </div>
+
+  </div>
+
+  <div class="box box5">
+    <div class="nested">Already Guessed:</div>
+    <div class="nested guessed-letters"></div>
+  </div>
       <!-- <h3>Already Guessed:</h3> -->
 
     </div>
