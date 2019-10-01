@@ -46,13 +46,17 @@ function guessLetter(e){//debugger
     document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
 
   }
-  setTimeout(checkWinStatus, 10)
+  setTimeout(checkEndStatus, 10)
 
 }
 
-function checkWinStatus() {
+function checkEndStatus() {
   if (document.querySelectorAll('span.letter-hidden').length === 0) {
     gameWon()
+  }
+  // debugger
+  if (wrongGuessCount === 0){
+    gameLost()
   }
 }
 
@@ -77,6 +81,15 @@ function gameWon() {
     if (result.value) {
       displayGameBoard()
       console.log(turnCount)}
+      if (!result.value) {
+        displayGameBoard()
+        Swal.fire({
+        position: 'top-end',
+        title: '<i>Thanks for playing! Come back soon!</i>',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
     })
 
 
