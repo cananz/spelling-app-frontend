@@ -24,7 +24,6 @@ function loadLandingPage() {
 
 
 function startBtnHandler(e) {
-    debugger
 
     if (e.target.id === 'starter') {
       category = 'all'
@@ -128,7 +127,7 @@ function configObj(method, body) {
 function getPhraseByCategory(category){
   fetch(phrasesURL, configObj('POST', {body: {category_name: category}}))
     .then(response => response.json())
-    .then(phraseObjArray => { debugger
+    .then(phraseObjArray => {
       postMatch(randomPhrase(phraseObjArray))
     })
 }
