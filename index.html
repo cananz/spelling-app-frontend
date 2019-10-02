@@ -14,54 +14,94 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script> -->
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js">
-
-  </script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
 
   <body>
-
-    <div class="header">
-      <h1>Spelling Game</h1>
-    </div>
-    <div class="wrapper">
-    <div class="box box1">
-      <div id="phrase-container" class="box">
+    <div class="ui grid">
+<!-- HEADING -->
+      <div class="row">
+        <div class="three wide column"></div>
+          <div class="center aligned ten wide column"> <h1>Spelling Game</h1></div>
+        <div class="three wide column"></div>
       </div>
-    </div>
+<!-- PHRASE ROW -->
+      <div class="row">
+        <div class="two wide column"></div>
+  <!-- PHRASE CONTAINER -->
+          <div class="twelve wide column">
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="ui cards" id="phrase-container"></div>
+              </div>
+            </div>
+          </div>
+
+        <div class="two wide column"></div>
+      </div>
 
 
-    <div id="alphabet-container" class="box box1">
 
-    </div>
-    <!-- <div class="nested">a</div> -->
 
-  <!-- <div class="box box2">Two</div> -->
-  <div class="box box3"></div>
-    <div class="progress-box box4">
-      Wrong Guesses Left:
-      <div class="ui indicating progress" data-value="8" data-total="8" id="example5">
-        <div class="bar">
-          <div class="progress"></div>
+
+
+      <!-- <div class="row">
+        <div class="two wide column"></div>
+          <div class="twelve wide column">
+            <div class="ui grid" id="phrase-container"></div>
+          </div>
+        <div class="two wide column"></div>
+      </div> -->
+<!-- ALPHABET CONTAINER -->
+      <div class="row">
+        <div class="column">
+          <div class="ui fluid card">
+            <div class="content">
+              <div class="center aligned header" id="alphabet-container">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-         <!-- Total Turns Taken: -->
-         <div class="wrong-turn-count nested">
+<!-- CURRENT GAME STATS -->
+      <div class="row">
+        <div class="five wide column" id="phrase-stats"></div>
 
-         </div>
+          <div class="six wide column">
+            <div class="ui fluid card" id="progress-box">
+              Wrong Guesses:
+              <div class="ui indicating progress" data-value="8" data-total="8" id="example5">
+                <div class="bar"><div class="progress"></div></div>
+              </div>
 
-       <div class="turn-count nested">
+              <div class="content">
+                <div class="description" id="wrong">
+
+                </div>
+              </div>
+
+              <div class="wrong-turn-count nested"></div>
+              <div class="turn-count nested"></div>
+            </div>
+
+          </div>
+
+
+        <div class="five wide column">
+          <div class="ui fluid card">
+
+            <div class="content"> <h4 id="guessed-letters"></h4> </div>
+          </div>
+        </div>
+
       </div>
+<!-- END -->
+  </div>
 
-    </div>
-    <div class="box box5">
-      <div class="nested">Already Guessed:</div>
-      <div class="nested guessed-letters"></div>
-    </div>
-      <!-- <h3>Already Guessed:</h3> -->
 
-    </div>
+
+    <script src="./src/start-game.js"></script>
     <script src="./src/index.js"></script>
     <script src="./src/end-game.js"></script>
     <script src="./src/phrase-stat.js"></script>

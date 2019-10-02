@@ -1,22 +1,32 @@
 const phrasesURL = "http://localhost:3000/phrases"
 const matchesURL = "http://localhost:3000/matches"
-
-
-const alphabetContainer = document.getElementById('alphabet-container')
 const phraseContainer = document.getElementById('phrase-container')
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+
 
 let currentPhrase
 let matchID
 let turnCount = 0
 let wrongGuessCount = 8
 
-//event listeners
 document.addEventListener("DOMContentLoaded", function() {
   displayGameBoard()
   // debugger
   alphabetContainer.addEventListener('click', guessLetter)
 })
+
+function configObj(method, body) {
+  return {
+    method: method,
+    headers:  {
+      "Content-Type": "application/json",
+      "Accepts": "application/json"},
+      body: JSON.stringify(body)
+    }
+}
+
+
+//event listeners
 
 
 
@@ -36,13 +46,17 @@ function guessLetter(e){//debugger
         .progress('decrement')
       ;
     }
+
+
     matches.forEach(letter => letter.className = 'letter-visible')
     // debugger
     turnCount += 1
     console.log(`turn count: ${turnCount}`)
 
     e.target.style.setProperty('visibility', 'hidden')
-    document.querySelector('.box5').lastElementChild.append(e.target.id)
+
+    // document.querySelector('.box5').lastElementChild.append(e.target.id)
+
     document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
 
   }
@@ -55,15 +69,7 @@ function guessLetter(e){//debugger
 
 
 
-function configObj(method, body) {
-    return {
-    method: method,
-    headers:  {
-      "Content-Type": "application/json",
-      "Accepts": "application/json"},
-    body: JSON.stringify(body)
-    }
-}
+
 
 
 
@@ -99,29 +105,22 @@ function postMatch(phrase) {
   })
 }
 
-// function randomPhrase(phraseObjArray) {
-//   let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
-//   currentPhrase = phraseObjArray[randomIndex]
-//   // debugger
-//   toDisplay = currentPhrase.content.toUpperCase().split("")
-//   displayPhrase(toDisplay, 'span', phraseContainer)
-// return currentPhrase
-// }
 function randomPhrase(phraseObjArray) {
-  let randomIndex = 1 //Math.floor((Math.random() * (phraseObjArray.length - 1)))
+  let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
   currentPhrase = phraseObjArray[randomIndex]
   // debugger
   toDisplay = currentPhrase.content.toUpperCase().split("")
-  displayPhrase(toDisplay, 'span', phraseContainer)
+  displayPhrase(toDisplay)
 return currentPhrase
 }
 
 function displayGameBoard() {
   clearBoard()
-
-  displayAlphabet()
+  alphabetReset()
+  // displayAlphabet()
   getPhrase()
   // Resets progress bar
+
   $('#example5')
   .progress({
     label: 'ratio',
@@ -129,6 +128,7 @@ function displayGameBoard() {
       ratio: '{value} of {total}'
     }
   })
+
 ;
 }
 
@@ -138,7 +138,7 @@ function clearBoard() {
 
   document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
   document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
-  document.querySelector('div.guessed-letters').innerText = ""
+  // document.querySelector('div.guessed-letters').innerText = ""
 }
 
 function displayAlphabet() {
@@ -157,35 +157,50 @@ function displayAlphabet() {
 }
 
 
-function displayPhrase(Arr, element, parentElement) {
-phraseContainer.innerHTML = ""
 
-  Arr.forEach(letter => {
-    letterContainer = document.createElement('span')
-    letterContainer.className = 'letter-container'
-    symbolContainer = document.createElement('span')
-    symbolContainer.className = 'symbol-container'
+function displayPhrase(ArrOfCharacters) {
+  // phraseContainer.innerHTML = ""
+
+  ArrOfCharacters.forEach(letter => {
+    // debugger
+
+//link image for each letter HEREEEEEEE
 
 
-    letterBlock = document.createElement('span')
+    let card = document.createElement('div')
+    card.id = letter
+    card.className = "ui segment"
+    card.innerText = letter
 
-      letterBlock.innerText = letter
-      letterBlock.setAttribute('id', letter)
+    // card.innerHTML =
+    //   `<div class="content">
+    //
+    //     <div class="side">${letter}</div>
+    //   </div>`
 
-      // debugger
-  if (alphabet.includes(letterBlock.id)) {
+
+    // card.innerText = letter
+      //letters
     // letterBlock.innerText = " "
-    letterBlock.className = 'letter-hidden'
-    letterContainer.appendChild(letterBlock)
-    parentElement.appendChild(letterContainer)
+    // card.outerHTML =
 
 
-  } else {
-    letterBlock.className = 'letter-visible'
-    symbolContainer.appendChild(letterBlock)
-    parentElement.appendChild(symbolContainer)
 
-  }
 
+    // `<h2 class="ui header">
+    // ${letter}
+    // </h2>`
+    // `<div class="ui move down reveal">
+    //   <div class='visible content'>
+    //     <div class='header'> ? </div>
+    //   </div>
+    //   <div class='hidden content'>
+    //     <div class='header'>${card.id}</div>
+    //   </div>`
+
+
+
+
+  phraseContainer.appendChild(card)
   })
 }

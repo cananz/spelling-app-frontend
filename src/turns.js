@@ -1,9 +1,6 @@
 
-let box = document.querySelector('div.phrase-stats')
-let phraseCard = document.createElement('div')
-phraseCard.className = "ui card"
-phraseCard.innerHTML =
-`<div class="content">
+
+<div class="content">
     <div class="header">Current Puzzle</div>
   </div>
   <div class="content">
@@ -22,6 +19,6 @@ phraseCard.innerHTML =
 
   <div class="extra content">
     <button class="ui button">New Game</button>
-  </div>`
+  </div>
 
-// box.appendChild(phraseCard)
+  
