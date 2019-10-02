@@ -161,16 +161,29 @@ function displayAlphabet() {
 function displayPhrase(ArrOfCharacters) {
   // phraseContainer.innerHTML = ""
 
-  ArrOfCharacters.forEach(letter => {
+  ArrOfCharacters.forEach(charString => {
     // debugger
 
-//link image for each letter HEREEEEEEE
+//link image for each charString HEREEEEEEE
 
 
-    let card = document.createElement('div')
-    card.id = letter
-    card.className = "ui segment"
-    card.innerText = letter
+    let tile = document.createElement('div')
+    if (charString === " ") {
+      tile.id = 'tile-space'
+      tile.className = "ui segment tile"
+    } else if (alphabet.includes(charString.toUpperCase())) {
+      tile.id = charString
+      tile.className = "ui piled segment tile"
+      tile.innerText = charString
+    } else {
+      tile.id = 'tile-punctuation'
+      tile.className = 'ui segment'
+      tile.innerText = charString
+    }
+
+
+
+
 
     // card.innerHTML =
     //   `<div class="content">
@@ -201,6 +214,6 @@ function displayPhrase(ArrOfCharacters) {
 
 
 
-  phraseContainer.appendChild(card)
+  phraseContainer.appendChild(tile)
   })
 }
