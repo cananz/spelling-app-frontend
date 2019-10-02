@@ -2,7 +2,7 @@ const phrasesURL = "http://localhost:3000/phrases"
 const matchesURL = "http://localhost:3000/matches"
 const BODY = document.querySelector('body')
 
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 let currentPhrase;
 let matchID;
@@ -53,6 +53,8 @@ function eventHandler(e) {
   if (e.type === 'keydown' && alphabet.includes(e.key.toUpperCase()) && document.activeElement != document.querySelector('input#insta-solve-input')) {
     let guess = e.key.toUpperCase()
     let matches = phraseContainer().querySelectorAll(`#${guess}`)
+    let index = alphabet.indexOf(guess)
+    alphabet.splice(index,1)
     guessLetter(guess, matches)
   }
 
@@ -199,7 +201,7 @@ function displayGameBoard(category) {
 function clearBoard() {
   turnCount = 0
   wrongGuessCount = 8
-
+  alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
   document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
   document.querySelector('div.guessed-letters').innerText = ""
@@ -290,6 +292,6 @@ function restartMatch() {
   fetch(matchesURL + '/' + matchID, configObj('DELETE', {}))
   .then(resp => resp.json())
   .then(test => {
-    displayGameBoard()
+    displayGameBoard("all")
   })
 }

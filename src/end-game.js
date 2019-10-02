@@ -31,10 +31,10 @@ function gameWon() {
   })
   .then((result) => {
     if (result.value) {
-      displayGameBoard()
+      displayGameBoard("all")
       console.log(turnCount)}
       if (!result.value) {
-        displayGameBoard()
+        displayGameBoard("all")
         Swal.fire({
         position: 'top-end',
         title: '<i>Thanks for playing! Come back soon!</i>',
