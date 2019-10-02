@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Spelling App</title>
-    <link rel="stylesheet" href="styles.css">
+const LANDPAGE = `<div class="landing">Welcome to the most ultimate spelling game!<br>
+<button id="starter">Let's Play!</button>
+<div class="ui selection dropdown">
+  <input type="hidden" name="category">
+  <i class="dropdown icon"></i>
+  <div class="default text">Category</div>
+  <div class="menu">
+    <div class="item" data-value="all">All</div>
+</div></div>
+</div>`
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-  </head>
 
-  <body>
 
-    <!-- <div class="header">
+
+
+const GAMEPAGE = `<div class="header">
       <h1>Spelling Game</h1>
     </div>
     <div class="wrapper">
@@ -25,18 +22,13 @@
       <div id="phrase-container" class="box">
       </div>
     </div>
-
-
     <div id="alphabet-container" class="box box1">
-
     </div>
-
   <div class="box box3">
     <div class="ui fluid card">
       <div class="content">
           <div class="header">Phrase Category: </div>
           <div class="ui subheader" id="phrase-category">
-
           </div>
         </div>
         <div class="content">
@@ -53,14 +45,12 @@
             </div>
           </div>
         </div>
-
         <div class="extra content">
           <button class="ui button" id="restart"
           uk-tooltip="title: Stuck? Click here to start a new puzzle!">New Game</button>
         </div>
     </div>
   </div>
-
   <div class="progress-box box4">
     Wrong Guesses Left:
     <div class="ui indicating progress" data-value="8" data-total="8" id="example5">
@@ -68,6 +58,7 @@
         <div class="progress"></div>
       </div>
     </div>
+       <!-- Total Turns Taken: -->
        <div class="wrong-turn-count nested">
        </div>
        <div class="nested">Already Guessed:
@@ -98,11 +89,4 @@
       </div>
     </div>
   </div>
-  </div> -->
-
-  </body>
-<script src="./src/index.js"></script>
-<script src="./src/end-game.js"></script>
-<script src="./src/page-loads.js"></script>
-<script src="./src/element-finder.js"></script>
-</html>
+  </div>`

@@ -1,44 +1,48 @@
 const phrasesURL = "http://localhost:3000/phrases"
 const matchesURL = "http://localhost:3000/matches"
+const BODY = document.querySelector('body')
 
-
-const alphabetContainer = document.getElementById('alphabet-container')
-const phraseContainer = document.getElementById('phrase-container')
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-const giveUp = document.getElementById("restart")
 
 let currentPhrase;
 let matchID;
 let turnCount = 0;
-const turnCountElement = document.querySelector('div.turn-count')
-const wrongGuessCountElement = document.querySelector('div.wrong-turn-count')
 let wrongGuessCount = 8;
 let phraseMatches;
 
 //event listeners
 document.addEventListener("DOMContentLoaded", function() {
-  displayGameBoard()
-  // debugger
-  alphabetContainer.addEventListener('click', eventHandler)
-
-  giveUp.addEventListener('click', restartMatch)
-
-  document.addEventListener('keydown', eventHandler)
-
-  document.querySelector('form#insta-solve-form').addEventListener('submit', instaSolve)
-
+  loadLandingPage()
 })
+
+function loadLandingPage() {
+  BODY.innerHTML = LANDPAGE;
+
+
+  getStart().addEventListener("click", () => {
+    loadGamePage()
+  })
+}
+
+function loadGamePage() {
+  BODY.innerHTML = GAMEPAGE;
+  displayGameBoard()
+  alphabetContainer().addEventListener('click', eventHandler)
+  giveUp().addEventListener('click', restartMatch)
+  document.addEventListener('keydown', eventHandler)
+  document.querySelector('form#insta-solve-form').addEventListener('submit', instaSolve)
+}
 
 function eventHandler(e) {
   if (e.type === 'click' && e.target.nodeName === 'BUTTON') {
     let guess = e.target.id
-    let matches = phraseContainer.querySelectorAll(`#${guess}`)
+    let matches = phraseContainer().querySelectorAll(`#${guess}`)
     guessLetter(guess, matches)
   }
 
   if (e.type === 'keydown' && alphabet.includes(e.key.toUpperCase()) && document.activeElement != document.querySelector('input#insta-solve-input')) {
     let guess = e.key.toUpperCase()
-    let matches = phraseContainer.querySelectorAll(`#${guess}`)
+    let matches = phraseContainer().querySelectorAll(`#${guess}`)
     guessLetter(guess, matches)
   }
 
@@ -49,8 +53,8 @@ function eventHandler(e) {
 
 
 function guessLetter(guess, matches){//debugger
-  
-  alphabetContainer.querySelector('button#' + guess).style.setProperty('visibility', 'hidden')
+
+  alphabetContainer().querySelector('button#' + guess).style.setProperty('visibility', 'hidden')
 
   if (matches.length === 0) { //check if guess is wrong
     document.querySelector('div.guessed-letters').append(guess)
@@ -137,14 +141,14 @@ function randomPhrase(phraseObjArray) {
   let randomIndex = Math.floor((Math.random() * (phraseObjArray.length - 1)))
   currentPhrase = phraseObjArray[randomIndex]
   toDisplay = currentPhrase.content.toUpperCase().split("")
-  displayPhrase(toDisplay, 'span', phraseContainer)
+  displayPhrase(toDisplay, 'span', phraseContainer())
 return currentPhrase
 }
 // function randomPhrase(phraseObjArray) {
 //   let randomIndex = 0 //Math.floor((Math.random() * (phraseObjArray.length - 1)))
 //   currentPhrase = phraseObjArray[randomIndex]
 //   toDisplay = currentPhrase.content.toUpperCase().split("")
-//   displayPhrase(toDisplay, 'span', phraseContainer)
+//   displayPhrase(toDisplay, 'span', phraseContainer())
 // return currentPhrase
 // }
 
@@ -174,7 +178,7 @@ function clearBoard() {
 }
 
 function displayAlphabet() {
-  alphabetContainer.innerHTML = ""
+  alphabetContainer().innerHTML = ""
   alphabet.forEach(letter => {
 
     letterBlock = document.createElement('button')
@@ -183,14 +187,14 @@ function displayAlphabet() {
       letterBlock.setAttribute('id', letter)
       letterBlock.className = 'letter-block'
 
-    alphabetContainer.appendChild(letterBlock)
+    alphabetContainer().appendChild(letterBlock)
   })
 
 }
 
 
 function displayPhrase(Arr, element, parentElement) {
-phraseContainer.innerHTML = ""
+phraseContainer().innerHTML = ""
 document.getElementById('phrase-category').innerText = currentPhrase.category
   Arr.forEach(letter => {
     letterContainer = document.createElement('span')

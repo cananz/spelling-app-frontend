@@ -101,7 +101,7 @@ function instaSolve(e) {
     gameWon()
   } else {
     turnCount += 2
-    turnCountElement.innerText = `total guesses: ${turnCount}`
+    turnCountElement().innerText = `total guesses: ${turnCount}`
     wrongGuess()
     wrongGuess()
 
