@@ -39,9 +39,12 @@
 
 
   <div class="box box3">
-    <div class="ui card">
+    <div class="ui fluid card">
       <div class="content">
-          <div class="header">Current Puzzle</div>
+          <div class="header">Phrase Category: </div>
+          <div class="ui subheader" id="phrase-category">
+
+          </div>
         </div>
         <div class="content">
           <h4 class="ui sub header">Stats</h4>
@@ -74,8 +77,10 @@
     </div>
        <!-- Total Turns Taken: -->
        <div class="wrong-turn-count nested">
-
        </div>
+       <div class="nested">Already Guessed:
+       </div>
+       <div class="nested guessed-letters"></div>
 
      <div class="turn-count nested">
     </div>
@@ -83,8 +88,24 @@
   </div>
 
   <div class="box box5">
-    <div class="nested">Already Guessed:</div>
-    <div class="nested guessed-letters"></div>
+    <div class="ui fluid card" id="insta-solve-card">
+      <div class="content">
+        <div class="header"><h3>InstaSolve!</h3></div>
+        <div class="meta">Enter the phrase here to see if you're correct!</div>
+        <div class="desrciption">
+          <p>Correctly solve the puzzle in 1 turn to win!</p>
+          <p>Careful! If you're wrong, you'll lose 2 turns.</p>
+        </div>
+      </div>
+
+      <div class="content">
+        <form id="insta-solve-form">
+          <input type="text" id="insta-solve-input">
+          <input type="submit" value="SOLVE!">
+        </form>
+      </div>
+    </div>
+    <!-- <div class="nested guessed-letters"></div> -->
   </div>
       <!-- <h3>Already Guessed:</h3> -->
 

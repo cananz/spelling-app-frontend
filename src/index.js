@@ -10,6 +10,8 @@ const giveUp = document.getElementById("restart")
 let currentPhrase;
 let matchID;
 let turnCount = 0;
+const turnCountElement = document.querySelector('div.turn-count')
+const wrongGuessCountElement = document.querySelector('div.wrong-turn-count')
 let wrongGuessCount = 8;
 let phraseMatches;
 
@@ -19,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // debugger
   alphabetContainer.addEventListener('click', guessLetter)
   giveUp.addEventListener('click', restartMatch)
+  document.querySelector('form#insta-solve-form').addEventListener('submit', instaSolve)
 })
+
 
 
 
@@ -30,29 +34,38 @@ function guessLetter(e){//debugger
   if (e.target.nodeName === "BUTTON") {
 
     let matches = document.querySelectorAll(`span#${e.target.id}`)
-    if (matches.length === 0) {
-      wrongGuessCount -= 1
-      // document.querySelector('progress.uk-progress').value = wrongGuessCount
-      document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
-      //decrements progress bar
-      $('#example5')
-        .progress('decrement')
-      ;
+//matches is every phrase character that matches the letter guessed
+
+    if (matches.length === 0) { //check if guess is wrong
+      document.querySelector('div.guessed-letters').append(e.target.id)
+      wrongGuess()
+    } else { //if correct guess, make matching phrase tiles visible
+      matches.forEach(letter => correctGuess(letter))
     }
-    matches.forEach(letter => letter.className = 'letter-visible')
+
     // debugger
     turnCount += 1
-    console.log(`turn count: ${turnCount}`)
-
     e.target.style.setProperty('visibility', 'hidden')
-    document.querySelector('.box5').lastElementChild.append(e.target.id)
     document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
 
   }
   setTimeout(checkEndStatus, 10)
-
 }
 
+function wrongGuess() {
+    wrongGuessCount -= 1
+    // document.querySelector('progress.uk-progress').value = wrongGuessCount
+    document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
+    //decrements progress bar
+    $('#example5')
+      .progress('decrement')
+    ;
+}
+
+
+function correctGuess(letter) {
+  letter.className = 'letter-visible'
+}
 
 function configObj(method, body) {
     return {
@@ -138,6 +151,7 @@ function clearBoard() {
   document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
   document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
   document.querySelector('div.guessed-letters').innerText = ""
+  document.getElementById('phrase-category').innerText = ""
 }
 
 function displayAlphabet() {
@@ -158,7 +172,7 @@ function displayAlphabet() {
 
 function displayPhrase(Arr, element, parentElement) {
 phraseContainer.innerHTML = ""
-
+document.getElementById('phrase-category').innerText = currentPhrase.category
   Arr.forEach(letter => {
     letterContainer = document.createElement('span')
     letterContainer.className = 'letter-container'

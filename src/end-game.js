@@ -88,3 +88,31 @@ function sendMatchEnd(wonValue) {
 
   fetch(matchesURL + '/' + matchID, configObj('PATCH', {turns: turnCount, 'won?': wonValue}))
 }
+
+
+function instaSolve(e) {
+  e.preventDefault()
+  let guess = e.target.querySelector('input#insta-solve-input').value
+
+  if (guess.toLowerCase() === currentPhrase.content.toLowerCase()) {
+    turnCount += 1
+    let letters = document.querySelectorAll('.letter-hidden')
+    letters.forEach(letter => correctGuess(letter))
+    gameWon()
+  } else {
+    turnCount += 2
+    turnCountElement.innerText = `total guesses: ${turnCount}`
+    wrongGuess()
+    wrongGuess()
+
+    Swal.fire({
+      position: 'bottom-end',
+      type: 'error',
+      title: `-2 turns "${guess}" is incorrect`,
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+  }
+  e.target.reset()
+}
