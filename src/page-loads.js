@@ -1,15 +1,27 @@
-const LANDPAGE = `<div class="landing">Welcome to the most ultimate spelling game!<br>
-<button id="starter">Let's Play!</button>
-<div class="ui selection dropdown">
-  <input type="hidden" name="category">
-  <i class="dropdown icon"></i>
-  <div class="default text">Category</div>
-  <div class="menu">
-    <div class="item" data-value="all">All</div>
-</div></div>
+
+
+
+
+const LANDPAGE =
+`<div class="landing">
+<h1>Welcome to the most ultimate spelling game!</h1>
+
+<div id="category-buttons" class="ui buttons category">
+<button class = 'ui button category' id="starter">Any Category</button>
+
+</div>
+
+
 </div>`
 
 
+// <div class="ui selection dropdown">
+//   <input type="hidden" name="category">
+//   <i class="dropdown icon"></i>
+//   <div class="default text">Category</div>
+//   <div class="menu">
+//     <div class="item" data-value="all">All</div>
+// </div>
 
 
 

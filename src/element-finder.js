@@ -19,5 +19,5 @@ function wrongGuessCountElement() {
 }
 
 function getStart() {
-  return document.getElementById('starter')
+  return document.querySelector('div#category-buttons')
 }

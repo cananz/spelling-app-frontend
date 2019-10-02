@@ -17,16 +17,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loadLandingPage() {
   BODY.innerHTML = LANDPAGE;
+  getCategories()
 
 
-  getStart().addEventListener("click", () => {
-    loadGamePage()
-  })
-}
+  getStart().addEventListener("click", startBtnHandler)}
 
-function loadGamePage() {
+
+function startBtnHandler(e) {
+    debugger
+
+    if (e.target.id === 'starter') {
+      category = 'all'
+    } else {
+      category = e.target.innerText
+    }
+    loadGamePage(category)
+  }
+
+
+function loadGamePage(category) {
   BODY.innerHTML = GAMEPAGE;
-  displayGameBoard()
+  displayGameBoard(category)
   alphabetContainer().addEventListener('click', eventHandler)
   giveUp().addEventListener('click', restartMatch)
   document.addEventListener('keydown', eventHandler)
@@ -48,7 +59,19 @@ function eventHandler(e) {
 
 }
 
-
+function getCategories() {
+  fetch(phrasesURL + '/categories')
+  .then(r => r.json())
+  .then(categoriesArray => {
+    categoriesArray.forEach(category => {
+      catBtn = document.createElement('button')
+      catBtn.className = 'ui button'
+      catBtn.innerText = category
+      catBtn.id = category.split(' ')[0]
+      document.querySelector('div#category-buttons').appendChild(catBtn)
+    })
+  })
+}
 
 
 
@@ -102,6 +125,13 @@ function configObj(method, body) {
 
 
 
+function getPhraseByCategory(category){
+  fetch(phrasesURL, configObj('POST', {body: {category_name: category}}))
+    .then(response => response.json())
+    .then(phraseObjArray => { debugger
+      postMatch(randomPhrase(phraseObjArray))
+    })
+}
 
 
 function getPhrase() {
@@ -152,10 +182,10 @@ return currentPhrase
 // return currentPhrase
 // }
 
-function displayGameBoard() {
+function displayGameBoard(category) {
   clearBoard()
   displayAlphabet()
-  getPhrase()
+  getPhraseByCategory(category)
   // Resets progress bar
   $('#example5')
   .progress({
