@@ -19,38 +19,57 @@ let phraseMatches;
 document.addEventListener("DOMContentLoaded", function() {
   displayGameBoard()
   // debugger
-  alphabetContainer.addEventListener('click', guessLetter)
+  alphabetContainer.addEventListener('click', eventHandler)
+
   giveUp.addEventListener('click', restartMatch)
+
+  document.addEventListener('keydown', eventHandler)
+
   document.querySelector('form#insta-solve-form').addEventListener('submit', instaSolve)
+
 })
 
+function eventHandler(e) {
+  if (e.type === 'click' && e.target.nodeName === 'BUTTON') {
+    let guess = e.target.id
+    let matches = phraseContainer.querySelectorAll(`#${guess}`)
+    guessLetter(guess, matches)
+  }
+
+  if (e.type === 'keydown' && alphabet.includes(e.key.toUpperCase()) && document.activeElement != document.querySelector('input#insta-solve-input')) {
+    let guess = e.key.toUpperCase()
+    let matches = phraseContainer.querySelectorAll(`#${guess}`)
+    guessLetter(guess, matches)
+  }
+
+}
 
 
 
 
 
-function guessLetter(e){//debugger
+function guessLetter(guess, matches){//debugger
+  
+  alphabetContainer.querySelector('button#' + guess).style.setProperty('visibility', 'hidden')
 
-  if (e.target.nodeName === "BUTTON") {
+  if (matches.length === 0) { //check if guess is wrong
+    document.querySelector('div.guessed-letters').append(guess)
+    wrongGuess()
+  } else { //if correct guess, make matching phrase tiles visible
+    matches.forEach(letterTile => correctGuess(letterTile))
+  }
+  turnCount += 1
 
-    let matches = document.querySelectorAll(`span#${e.target.id}`)
+  document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
+
+  setTimeout(checkEndStatus, 10)
+  }
 //matches is every phrase character that matches the letter guessed
 
-    if (matches.length === 0) { //check if guess is wrong
-      document.querySelector('div.guessed-letters').append(e.target.id)
-      wrongGuess()
-    } else { //if correct guess, make matching phrase tiles visible
-      matches.forEach(letter => correctGuess(letter))
-    }
 
     // debugger
-    turnCount += 1
-    e.target.style.setProperty('visibility', 'hidden')
-    document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
 
-  }
-  setTimeout(checkEndStatus, 10)
-}
+
 
 function wrongGuess() {
     wrongGuessCount -= 1
