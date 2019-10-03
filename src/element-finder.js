@@ -6,7 +6,7 @@ function phraseContainer() {
   return document.getElementById('phrase-container')
 }
 
-function giveUp() {
+function newGameBtn() {
   return document.getElementById("restart")
 }
 
@@ -18,6 +18,26 @@ function wrongGuessCountElement() {
   return document.querySelector('div.wrong-turn-count')
 }
 
-function getStart() {
+function categoryBtns() {
   return document.querySelector('div#category-buttons')
+}
+
+function instaSolveForm() {
+  return document.querySelector('form#insta-solve-form')
+}
+
+function instaSolveInput() {
+  return document.querySelector('input#insta-solve-input')
+}
+
+function guessedLetters() {
+  return document.querySelector('div.guessed-letters')
+}
+
+function currentCategory() {
+  return document.getElementById('phrase-category')
+}
+
+function hiddenPhraseLetters() {
+  return document.querySelectorAll('.letter-hidden')
 }

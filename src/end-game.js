@@ -1,7 +1,7 @@
 
 
 function checkEndStatus() {
-  if (document.querySelectorAll('span.letter-hidden').length === 0) {
+  if (hiddenPhraseLetters().length === 0) {
     gameWon()
   }
   // debugger
@@ -96,7 +96,7 @@ function instaSolve(e) {
 
   if (guess.toLowerCase() === currentPhrase.content.toLowerCase()) {
     turnCount += 1
-    let letters = document.querySelectorAll('.letter-hidden')
+    let letters = hiddenPhraseLetters()
     letters.forEach(letter => correctGuess(letter))
     gameWon()
   } else {

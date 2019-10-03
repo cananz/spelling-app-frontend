@@ -17,92 +17,79 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function loadLandingPage() {
   BODY.innerHTML = LANDPAGE;
+//get list of categories from server
   getCategories()
-
-
-  getStart().addEventListener("click", startBtnHandler)}
+//category buttons to start game
+  categoryBtns().addEventListener("click", startBtnHandler)
+}
 
 
 function startBtnHandler(e) {
-
-    if (e.target.id === 'starter') {
-      category = 'all'
-    } else {
-      category = e.target.innerText
-    }
-    loadGamePage(category)
+  //load a game based on what category is selected
+  if (e.target.id === 'starter') { //starter = all categories
+    category = 'all'
+  } else {
+    category = e.target.innerText
   }
+  loadGamePage(category)
+}
 
 
 function loadGamePage(category) {
+//landing page --> game play page content
   BODY.innerHTML = GAMEPAGE;
-  displayGameBoard(category)
-  alphabetContainer().addEventListener('click', eventHandler)
-  giveUp().addEventListener('click', restartMatch)
-  document.addEventListener('keydown', eventHandler)
-  document.querySelector('form#insta-solve-form').addEventListener('submit', instaSolve)
+
+    displayGameBoard(category)
+    //listener for alphabet buttons
+    alphabetContainer().addEventListener('click', eventHandler)
+    //listener for newGame button
+    newGameBtn().addEventListener('click', restartMatch)
+    //listener for alphabet keyboard btns
+    document.addEventListener('keydown', eventHandler)
+    //listener for instaSolve Form
+    instaSolveForm().addEventListener('submit', instaSolve)
 }
 
-function eventHandler(e) {
+function eventHandler(e) { //handler for alphabet btns and keys
+// event handler for alphabet buttons
   if (e.type === 'click' && e.target.nodeName === 'BUTTON') {
     let guess = e.target.id
     let matches = phraseContainer().querySelectorAll(`#${guess}`)
     guessLetter(guess, matches)
   }
+// event handler for pressing on keys, unless typing in InstaSolve Form
+  if (e.type === 'keydown'
+    && alphabet.includes(e.key.toUpperCase())
+    && document.activeElement != instaSolveInput()) {
 
-  if (e.type === 'keydown' && alphabet.includes(e.key.toUpperCase()) && document.activeElement != document.querySelector('input#insta-solve-input')) {
     let guess = e.key.toUpperCase()
     let matches = phraseContainer().querySelectorAll(`#${guess}`)
     let index = alphabet.indexOf(guess)
+
     alphabet.splice(index,1)
     guessLetter(guess, matches)
   }
-
 }
 
-function getCategories() {
-  fetch(phrasesURL + '/categories')
-  .then(r => r.json())
-  .then(categoriesArray => {
-    categoriesArray.forEach(category => {
-      catBtn = document.createElement('button')
-      catBtn.className = 'ui button'
-      catBtn.innerText = category
-      catBtn.id = category.split(' ')[0]
-      document.querySelector('div#category-buttons').appendChild(catBtn)
-    })
-  })
-}
-
-
-
-function guessLetter(guess, matches){//debugger
+function guessLetter(guess, matches){
 
   alphabetContainer().querySelector('button#' + guess).style.setProperty('visibility', 'hidden')
 
   if (matches.length === 0) { //check if guess is wrong
-    document.querySelector('div.guessed-letters').append(guess)
+    guessLetters().append(guess)
     wrongGuess()
   } else { //if correct guess, make matching phrase tiles visible
     matches.forEach(letterTile => correctGuess(letterTile))
   }
   turnCount += 1
 
-  document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
+  turnCountElement().innerText = `total guesses: ${turnCount}`
 
   setTimeout(checkEndStatus, 10)
   }
-//matches is every phrase character that matches the letter guessed
-
-
-    // debugger
-
-
 
 function wrongGuess() {
     wrongGuessCount -= 1
-    // document.querySelector('progress.uk-progress').value = wrongGuessCount
-    document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
     //decrements progress bar
     $('#example5')
       .progress('decrement')
@@ -202,10 +189,9 @@ function clearBoard() {
   turnCount = 0
   wrongGuessCount = 8
   alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-  document.querySelector('div.turn-count').innerText = `total guesses: ${turnCount}`
-  document.querySelector('div.wrong-turn-count').innerText = `wrong guesses remaining: ${wrongGuessCount}`
-  document.querySelector('div.guessed-letters').innerText = ""
-  document.getElementById('phrase-category').innerText = ""
+  turnCountElement().innerText = `total guesses: ${turnCount}`
+  guessedLetters().innerText = ""
+  currentCategory().innerText = ""
 }
 
 function displayAlphabet() {
@@ -293,5 +279,19 @@ function restartMatch() {
   .then(resp => resp.json())
   .then(test => {
     displayGameBoard("all")
+  })
+}
+
+function getCategories() {
+  fetch(phrasesURL + '/categories')
+  .then(r => r.json())
+  .then(categoriesArray => {
+    categoriesArray.forEach(category => {
+      catBtn = document.createElement('button')
+      catBtn.className = 'ui button'
+      catBtn.innerText = category
+      catBtn.id = category.split(' ')[0]
+      categoryBtns().appendChild(catBtn)
+    })
   })
 }
