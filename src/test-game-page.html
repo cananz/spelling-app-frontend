@@ -1,14 +1,54 @@
-<div class="header">
-  <h1>Spelling Game</h1>
+<div class="ui grid">
+  <!-- HEADING -->
+        <div class="row">
+          <div class="three wide column"></div>
+            <div class="center aligned ten wide column"> <h1>Spelling Game</h1></div>
+          <div class="three wide column"></div>
+        </div>
 </div>
 
-<div class="wrapper">
-  <div class="box box1">
+<div class="ui grid wrapper">
+  <!-- PHRASE ROW -->
+        <div class="row">
+          <div class="two wide column"></div>
+    <!-- PHRASE CONTAINER -->
+            <div class="twelve wide column">
+              <div class="ui fluid card" id="phrase-card">
+                <div class="content">
+                  <div class="ui horizontal segments" id="phrase-container"></div>
+                </div>
+              </div>
+            </div>
+
+          <div class="two wide column"></div>
+        </div>
+
+  <!-- ALPHABET CONTAINER -->
+        <div class="row">
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="content">
+                <div class="center aligned header" id="alphabet-container">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+
+<div class="ui grid">
+  <!-- <div class="box box1">
     <div id="phrase-container" class="box">
     </div>
-  </div>
-  <div id="alphabet-container" class="box box1">
-  </div>
+  </div> -->
+
+
+  <!-- <div id="alphabet-container" class="box box1">
+  </div> -->
+
+
   <div class="box box3">
     <div class="ui fluid card">
       <div class="content">
@@ -36,6 +76,8 @@
       </div>
     </div>
   </div>
+
+
   <div class="progress-box box4">
     Wrong Guesses Left:
     <div class="ui indicating progress" data-value="8" data-total="8" id="example5">
@@ -44,15 +86,13 @@
       </div>
     </div>
     <!-- Total Turns Taken: -->
-    <div class="wrong-turn-count nested">
-    </div>
+
     <div class="nested">Already Guessed:
+      <div class="nested guessed-letters"></div>
     </div>
-    <div class="nested guessed-letters"></div>
 
     <div class="turn-count nested">
     </div>
-
   </div>
 
   <div class="box box5">

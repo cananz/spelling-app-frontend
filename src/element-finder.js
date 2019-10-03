@@ -31,7 +31,7 @@ function instaSolveInput() {
 }
 
 function guessedLetters() {
-  return document.querySelector('div.guessed-letters')
+  return document.querySelector('.nested.guessed-letters')
 }
 
 function currentCategory() {

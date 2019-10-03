@@ -1,5 +1,5 @@
 
-span.letter-visible{
+.letter-visible{
   visibility: visible;
   display: inline-block;
   /* background-blend-mode: darken; */
@@ -15,7 +15,7 @@ span.letter-visible{
   vertical-align: bottom;
 }
 
-span.letter-hidden{
+.letter-hidden{
   visibility: hidden;
   display: inline-block;
   /* border: 1px solid black; */
@@ -30,17 +30,18 @@ span.letter-hidden{
   /* color: white; */
 }
 
-span.letter-container{
-  border: 2px solid #ffec99;
+.letter-container{
+  border: 2px solid navy;
   /* border-radius: 3px; */
   /* background-color: #fff9db; */
   width: 60px;
   height: 60px;
   padding: 4px;
-  background-color: white;
+  background-color: ghostwhite;
+
 }
 
-span.symbol-container{
+.symbol-container{
   background-color: azure;
   width: 50px;
   height: 50px;
@@ -61,6 +62,7 @@ font-size: 35px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  
 }
 
 /* * {box-sizing: border-box;} */

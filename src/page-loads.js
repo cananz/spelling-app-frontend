@@ -26,9 +26,15 @@ const LANDPAGE =
 
 
 
-const GAMEPAGE = `<div class="header">
-      <h1>Spelling Game</h1>
-    </div>
+const GAMEPAGE =
+`<div class="ui grid">
+  <!-- HEADING -->
+        <div class="row">
+          <div class="three wide column"></div>
+            <div class="center aligned ten wide column"> <h1>Spelling Game</h1></div>
+          <div class="three wide column"></div>
+        </div>
+</div>
     <div class="wrapper">
     <div class="box box1">
       <div id="phrase-container" class="box">
@@ -71,8 +77,7 @@ const GAMEPAGE = `<div class="header">
       </div>
     </div>
        <!-- Total Turns Taken: -->
-       <div class="wrong-turn-count nested">
-       </div>
+
        <div class="nested">Already Guessed:
        </div>
        <div class="nested guessed-letters"></div>
