@@ -5,7 +5,7 @@ function checkEndStatus() {
     gameWon()
   }
   // debugger
-  if (wrongGuessCount === 0){
+  if (wrongGuessCount <= 0){
     gameLost()
   }
 }
@@ -54,7 +54,8 @@ function gameLost() {
   // alert that you won
   sendMatchEnd(false)
   Swal.fire({
-    title: `<strong>You ran out of incorrect guesses!</strong>`,
+    title: `You ran out of incorrect guesses!`,
+    html: `The correct phrase was: <i>${currentPhrase.content}</i>`,
     type: 'error',
     imageUrl: 'https://media1.tenor.com/images/c374c51f3cda56583cf23bac6f9a0230/tenor.gif',
       imageHeight: 200,
@@ -68,9 +69,9 @@ function gameLost() {
   })
   .then((result) => {
     if (result.value) {
-      displayGameBoard()}
+      displayGameBoard("all")}
     if (!result.value) {
-      displayGameBoard()
+      displayGameBoard("all")
       Swal.fire({
       position: 'top-end',
       title: '<i>Thanks for playing! Come back soon!</i>',
@@ -115,4 +116,5 @@ function instaSolve(e) {
 
   }
   e.target.reset()
+  setTimeout(checkEndStatus, 10)
 }
