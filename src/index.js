@@ -76,7 +76,7 @@ function guessLetter(guess, matches){
   alphabetContainer().querySelector('button#' + guess).style.setProperty('visibility', 'hidden')
 
   if (matches.length === 0) { //check if guess is wrong
-    guessLetters().append(guess)
+    guessedLetters().append(guess)
     wrongGuess()
   } else { //if correct guess, make matching phrase tiles visible
     matches.forEach(letterTile => correctGuess(letterTile))
